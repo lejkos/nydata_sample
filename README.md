@@ -55,8 +55,13 @@ V. Run the proof of concept script in the project root:
 **Attention:** Unfortunately there is a bug in `flask-migrate` which 
 effects one of my five systems even with Docker! This bug just appeared
 in the final test run (this evening) so I cannot provide a solution
-yet. Here you can find the whole discussion: https://github.com/miguelgrinberg/Flask-Migrate/issues/213#issuecomment-404247334
+yet. 
 
+Here you can find the whole discussion: 
+https://github.com/miguelgrinberg/Flask-Migrate/issues/213#issuecomment-404247334
+Mid-term problem solution: As long as there is no real bug fix
+available and I would verify which builds & versions we use and 
+create a whitelist of always working environments.
 
 ## API usage
 
