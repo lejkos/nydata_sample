@@ -10,15 +10,6 @@ This readme assumes an installed and up-to-date version of
 - `docker` and
 - `docker-compose`.
 
-## Configuration
-
-Make a copy of the file `.env.example` called `.env` and 
-fill out all configuration values. 
-
-**Important:** The app nor the tests will run without 
-this configuration. A testuser is configured for this proof
-of concept. 
-
 ## Quick Proof of Concept
 
 **Requirement:** Please ensure that the ports **5000** and **5432** are available.
