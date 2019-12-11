@@ -1,0 +1,83 @@
+
+version: '3.6'
+
+x-build-args: &build_args
+  INSTALL_PYTHON_VERSION: 3.7
+  INSTALL_NODE_VERSION: 12
+
+x-default-volumes: &default_volumes
+  volumes:
+    - ./:/app
+    - node-modules:/app/node_modules
+    - ./dev.db:/tmp/dev.db
+    - /var/log/nginx:/var/log/nginx
+
+services:
+  db:
+    restart: always
+    image: "postgres"
+    container_name: "my_postgres"
+    #   Setup the username, password, and database name. You can changes these values.
+    environment:
+      - POSTGRES_USER=$POSTGRES_USER
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+      - POSTGRES_DB=$POSTGRES_DB
+    ports:
+      - "5432:5432"
+    expose:
+      - 5432
+    #   Set a volume some that database is not lost after shutting down the container.
+    #   I used the name postgres-data but you can changed it to something else.
+    #   Please, do not use /tmp/ for a real production server!
+    volumes:
+      - /tmp/postgres-data:/var/lib/postgresql/data
+
+#  flask-dev:
+#    build:
+#      context: .
+#      target: development
+#      args:
+#        <<: *build_args
+#    image: "nydata-development"
+#    ports:
+#      - "5000:5000"
+#      - "2992:2992"
+#    <<: *default_volumes
+
+  flask-prod:
+    build:
+      context: .
+      target: production
+      args:
+        <<: *build_args
+    image: "nydata-production"
+    ports:
+      - "5000:5000"
+    expose:
+      - 5000
+    links:
+      - db
+    environment:
+      POSTGRES_URL: 'db'
+      FLASK_ENV: production
+      FLASK_DEBUG: 0
+      LOG_LEVEL: info
+      GUNICORN_WORKERS: 4
+    <<: *default_volumes
+
+  manage:
+    build:
+      context: .
+      target: manage
+    environment:
+      FLASK_ENV: production
+      FLASK_DEBUG: 0
+    image: "nydata-manage"
+    stdin_open: true
+    tty: true
+    <<: *default_volumes
+
+volumes:
+  node-modules:
+  static-build:
+  dev-db:

@@ -1,0 +1,72 @@
+*.py[cod]
+
+# C extensions
+*.so
+
+# PyCharm
+.idea/*
+
+# Packages
+*.egg
+*.egg-info
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+lib
+lib64
+
+# Jupyter Notebook
+.ipynb_checkpoints/*
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.tox
+nosetests.xml
+
+# Tests
+htmlcov/*
+.mypy_cache/*
+
+# Virtual Environments
+venv/*
+
+
+# Translations
+*.mo
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+
+# Complexity
+output/*.html
+output/*/index.html
+
+# Sphinx
+docs/_build
+
+.webassets-cache
+
+# Virtualenvs
+env/
+
+# npm
+/node_modules/
+
+# webpack-built files
+/nydata/static/build/
+
+# Configuration
+.env
+
+# Development database
+*.db
